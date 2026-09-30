@@ -1,15 +1,17 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import Reveal from '../components/ui/Reveal'
 import SectionHeading from '../components/ui/SectionHeading'
 import ProjectCard from '../components/ui/ProjectCard'
+import ProjectModal from '../components/ui/ProjectModal'
 import { projects } from '../data/projects'
 import { profile, experience, leadership, education, skills } from '../data/site'
 
 export default function Home() {
   const location = useLocation()
   const prefersReducedMotion = useReducedMotion()
+  const [activeProject, setActiveProject] = useState(null)
 
   useEffect(() => {
     if (location.hash) {
@@ -25,34 +27,26 @@ export default function Home() {
       <section id="projects" className="section-space">
         <div className="container-edit">
           <SectionHeading index="01" title="Selected Projects" />
-          <div className="grid sm:grid-cols-2 gap-8 lg:gap-10">
+          <div className="grid sm:grid-cols-2 gap-8 lg:gap-10 items-stretch">
             {projects.map((project, i) => (
-              <ProjectCard key={project.slug} project={project} delay={i * 0.06} />
+              <ProjectCard key={project.slug} project={project} delay={i * 0.06} onOpen={setActiveProject} />
             ))}
           </div>
         </div>
       </section>
 
+      <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />
+
       <section id="about" className="section-space border-t border-line">
         <div className="container-edit">
           <SectionHeading index="02" title="About" />
-          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-20">
-            <Reveal>
-              <div className="space-y-5 text-ink-soft leading-relaxed text-base sm:text-lg max-w-xl">
-                {profile.aboutParagraphs.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="border border-line rounded-sm p-6 sm:p-8">
-                <h3 className="text-xs tracking-widest text-ink-faint mb-4">EDUCATION</h3>
-                <p className="text-ink font-display text-lg mb-1">{education.school}</p>
-                <p className="text-ink-soft text-sm mb-1">{education.degree}</p>
-                <p className="text-ink-faint text-sm">{education.period}</p>
-              </div>
-            </Reveal>
-          </div>
+          <Reveal>
+            <div className="space-y-5 text-ink-soft leading-relaxed text-base sm:text-lg max-w-xl">
+              {profile.aboutParagraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -79,7 +73,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div>
+            <div className="mb-16">
               <h4 className="text-xs tracking-widest text-ink-faint mb-5">LEADERSHIP</h4>
               <div className="grid sm:grid-cols-2 gap-6">
                 {leadership.map((l) => (
@@ -88,6 +82,18 @@ export default function Home() {
                     <p className="text-ink-faint text-sm">{l.org}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.15}>
+            <div>
+              <h4 className="text-xs tracking-widest text-ink-faint mb-5">EDUCATION</h4>
+              <div className="border-t border-line pt-4">
+                <p className="text-ink">{education.degree}</p>
+                <p className="text-ink-faint text-sm">
+                  {education.school} · {education.period}
+                </p>
               </div>
             </div>
           </Reveal>
