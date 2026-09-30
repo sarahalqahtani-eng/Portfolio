@@ -1,56 +1,27 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f0f0ff',
-          100: '#e4e4ff',
-          200: '#cccbff',
-          300: '#a9a5ff',
-          400: '#8178ff',
-          500: '#6366f1',
-          600: '#5147e8',
-          700: '#4538d1',
-          800: '#3a30aa',
-          900: '#322c86',
-        },
-        accent: {
-          pink: '#f472b6',
-          violet: '#a78bfa',
-          cyan: '#67e8f9',
-          emerald: '#34d399',
-        }
+        paper: '#F4EEE3',
+        'paper-dim': '#ECE4D4',
+        ink: '#2B2723',
+        'ink-soft': '#5B5449',
+        'ink-faint': '#6E6656',
+        accent: '#9C6B33',
+        'accent-soft': '#B98B54',
+        line: '#DDD2BB',
       },
       fontFamily: {
-        sans: ['Inter', 'Segoe UI', 'sans-serif'],
-        arabic: ['Tajawal', 'Arial', 'sans-serif'],
+        display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
+        sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
-      animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin-slow': 'spin 20s linear infinite',
-        'gradient': 'gradient 8s ease infinite',
-        'shimmer': 'shimmer 2s linear infinite',
+      maxWidth: {
+        edit: '1180px',
       },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' },
-        },
-      },
-      backdropBlur: {
-        xs: '2px',
+      transitionTimingFunction: {
+        editorial: 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
     },
   },
